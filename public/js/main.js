@@ -19488,22 +19488,22 @@ module.exports = require('./lib/React');
 
 },{"./lib/React":55}],168:[function(require,module,exports){
 var React = require('react');
-
 var ListItem = require('./ListItem.jsx');
 
 var List = React.createClass({
-  displayName: 'List',
+    displayName: 'List',
 
-  render: function () {
-    var createItem = function (text, index) {
-      return React.createElement(ListItem, { key: index + text, text: text });
-    };
-    return React.createElement(
-      'ul',
-      null,
-      this.props.items.map(createItem)
-    );
-  }
+    render: function () {
+        var createItem = function (text, index) {
+            return React.createElement(ListItem, { key: index + text, text: text });
+        };
+
+        return React.createElement(
+            'ul',
+            null,
+            this.props.items.map(createItem)
+        );
+    }
 });
 
 module.exports = List;
@@ -19512,19 +19512,19 @@ module.exports = List;
 var React = require('react');
 
 var ListItem = React.createClass({
-  displayName: 'ListItem',
+    displayName: 'ListItem',
 
-  render: function () {
-    return React.createElement(
-      'li',
-      null,
-      React.createElement(
-        'h4',
-        null,
-        this.props.text
-      )
-    );
-  }
+    render: function () {
+        return React.createElement(
+            'li',
+            null,
+            React.createElement(
+                'h4',
+                null,
+                this.props.text
+            )
+        );
+    }
 });
 
 module.exports = ListItem;
@@ -19534,44 +19534,45 @@ var React = require('react');
 var List = require('./List.jsx');
 
 var ListManager = React.createClass({
-  displayName: 'ListManager',
+    displayName: 'ListManager',
 
-  getInitialState: function () {
-    return { items: [], newItemText: '' };
-  },
-  onChange: function (e) {
-    this.setState({ newItemText: e.target.value });
-  },
-  handleSubmit: function (e) {
-    e.preventDefault();
+    getInitialState: function () {
+        return { items: [], newItemText: '' };
+    },
+    onChange: function (e) {
+        this.setState({ newItemText: e.target.value });
+    },
+    handleSubmit: function (e) {
+        e.preventDefault();
 
-    var currentItems = this.state.items;
+        var currentItems = this.state.items;
 
-    currentItems.push(this.state.newItemText);
+        currentItems.push(this.state.newItemText);
 
-    this.setState({ items: currentItems, newItemText: '' });
-  },
-  render: function () {
-    return React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'h3',
-        null,
-        this.props.title
-      ),
-      React.createElement(
-        'form',
-        { onSubmit: this.handleSubmit },
-        React.createElement('input', { onChange: this.onChange, value: this.state.newItemText }),
-        React.createElement(
-          'button',
-          null,
-          'Add'
-        )
-      )
-    );
-  }
+        this.setState({ items: currentItems, newItemText: '' });
+    },
+    render: function () {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'h3',
+                null,
+                this.props.title
+            ),
+            React.createElement(
+                'form',
+                { onSubmit: this.handleSubmit },
+                React.createElement('input', { onChange: this.onChange, value: this.state.newItemText }),
+                React.createElement(
+                    'button',
+                    null,
+                    'Add'
+                )
+            ),
+            React.createElement(List, { items: this.state.items })
+        );
+    }
 });
 
 module.exports = ListManager;
